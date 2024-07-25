@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 
-import { ROUTES } from "@src/types";
+import { LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
 import { Layout } from "@src/components";
 import { useUsernameStore } from "@src/stores";
 
@@ -16,7 +16,7 @@ export function Home() {
   const username = useUsernameStore((state) => state.username);
 
   useEffect(() => {
-    if (!localStorage.getItem("username")) {
+    if (!localStorage.getItem(LOCAL_STORAGE_KEYS.username)) {
       navigate(ROUTES.login);
     }
   }, []);

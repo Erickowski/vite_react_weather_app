@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Input, Typography } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 
-import { ROUTES } from "@src/types";
+import { LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
 import { Layout } from "@src/components";
 import { useUsernameStore } from "@src/stores";
 
@@ -23,7 +23,7 @@ export function Login() {
   const handleLogin = () => {
     if (username.trim()) {
       setIsUsernameValid(true);
-      localStorage.setItem("username", username);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.username, username);
       navigate(ROUTES.home);
     } else {
       setIsUsernameValid(false);
@@ -31,7 +31,7 @@ export function Login() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("username")) {
+    if (localStorage.getItem(LOCAL_STORAGE_KEYS.username)) {
       navigate(ROUTES.home);
     }
   }, []);

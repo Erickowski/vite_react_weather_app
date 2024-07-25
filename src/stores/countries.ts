@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
-import { QUERY_STATUS } from "@src/types";
+import { CountryFormatted, QUERY_STATUS } from "@src/types";
 import { COUNTRIES_API } from "@src/api";
+import { CountriesAdapter } from "@src/adapters";
 
 interface Countries {
-  data: unknown;
+  data: CountryFormatted;
   status: QUERY_STATUS;
 }
 
@@ -29,9 +30,10 @@ export const useCountriesStore = create<CountriesState>((set) => ({
         },
       });
       const response = await fetch(COUNTRIES_API);
+
       set({
         countries: {
-          data: await response.json(),
+          data: CountriesAdapter(await response.json()),
           status: QUERY_STATUS.success,
         },
       });

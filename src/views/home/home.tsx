@@ -36,6 +36,8 @@ export function Home() {
     }
   }, [username, countries.status]);
 
+  console.info(countries.data);
+
   return (
     <Layout>
       <Header style={STYLES.header}>

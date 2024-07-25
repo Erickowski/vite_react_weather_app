@@ -13,7 +13,13 @@ import { STYLES } from "./styles";
 export function Home() {
   const navigate = useNavigate();
 
-  const username = useUsernameStore((state) => state.username);
+  const { username, setUsername } = useUsernameStore((state) => state);
+
+  const handleLogout = () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.username);
+    setUsername("");
+    navigate(ROUTES.login);
+  };
 
   useEffect(() => {
     if (!localStorage.getItem(LOCAL_STORAGE_KEYS.username)) {
@@ -25,7 +31,9 @@ export function Home() {
     <Layout>
       <Header style={STYLES.header}>
         <Typography.Title level={2}>Welcome {username}</Typography.Title>
-        <Button type="text">Logout</Button>
+        <Button type="text" onClick={handleLogout}>
+          Logout
+        </Button>
       </Header>
       <Content>Country Input</Content>
       <Content>City List</Content>

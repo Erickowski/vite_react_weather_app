@@ -7,13 +7,19 @@ import { STYLES } from "./styles";
 
 export function Login() {
   const [username, setUsername] = useState("");
+  const [isUsernameValid, setIsUsernameValid] = useState(true);
 
   const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
   const handleLogin = () => {
-    window.alert("Hello " + username);
+    if (username.trim()) {
+      setIsUsernameValid(true);
+      window.alert("Hello " + username);
+    } else {
+      setIsUsernameValid(false);
+    }
   };
 
   return (
@@ -23,7 +29,16 @@ export function Login() {
       </Header>
       <Content style={STYLES.content}>
         <Typography.Title level={5}>Username</Typography.Title>
-        <Input value={username} onChange={handleChangeUsername} />
+        <Input
+          onChange={handleChangeUsername}
+          status={isUsernameValid ? "" : "error"}
+          value={username}
+        />
+        {!isUsernameValid && (
+          <Typography.Text style={STYLES.textError}>
+            Username is required
+          </Typography.Text>
+        )}
       </Content>
       <Footer style={STYLES.footer}>
         <Button type="primary" onClick={handleLogin}>

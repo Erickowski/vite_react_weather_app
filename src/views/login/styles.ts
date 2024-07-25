@@ -12,9 +12,11 @@ export const STYLES: Record<string, React.CSSProperties> = {
     backgroundColor: "transparent",
   },
   content: {
-    textAlign: "center",
     minHeight: 120,
-    lineHeight: "120px",
+    lineHeight: "60px",
+  },
+  textError: {
+    color: "red",
   },
   footer: {
     textAlign: "center",

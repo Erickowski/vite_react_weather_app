@@ -6,13 +6,14 @@ import { Content, Footer, Header } from "antd/es/layout/layout";
 
 import { ROUTES } from "@src/types";
 import { Layout } from "@src/components";
+import { useUsernameStore } from "@src/stores";
 
 import { STYLES } from "./styles";
 
 export function Login() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const { username, setUsername } = useUsernameStore((state) => state);
   const [isUsernameValid, setIsUsernameValid] = useState(true);
 
   const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {

@@ -6,11 +6,14 @@ import { Content, Header } from "antd/es/layout/layout";
 
 import { ROUTES } from "@src/types";
 import { Layout } from "@src/components";
+import { useUsernameStore } from "@src/stores";
 
 import { STYLES } from "./styles";
 
 export function Home() {
   const navigate = useNavigate();
+
+  const username = useUsernameStore((state) => state.username);
 
   useEffect(() => {
     if (!localStorage.getItem("username")) {
@@ -21,7 +24,7 @@ export function Home() {
   return (
     <Layout>
       <Header style={STYLES.header}>
-        <Typography.Title level={2}>Welcome USERNAME</Typography.Title>
+        <Typography.Title level={2}>Welcome {username}</Typography.Title>
         <Button type="text">Logout</Button>
       </Header>
       <Content>Country Input</Content>

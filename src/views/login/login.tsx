@@ -1,11 +1,16 @@
 import { ChangeEvent, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { Button, Input, Layout, Typography } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
+
+import { ROUTES } from "@src/types";
 
 import { STYLES } from "./styles";
 
 export function Login() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [isUsernameValid, setIsUsernameValid] = useState(true);
 
@@ -16,7 +21,7 @@ export function Login() {
   const handleLogin = () => {
     if (username.trim()) {
       setIsUsernameValid(true);
-      window.alert("Hello " + username);
+      navigate(ROUTES.home);
     } else {
       setIsUsernameValid(false);
     }

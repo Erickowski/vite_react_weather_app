@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 
-import { LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
+import { LOCAL_STORAGE_KEYS, QUERY_STATUS, ROUTES } from "@src/types";
 import { Layout } from "@src/components";
-import { useUsernameStore } from "@src/stores";
+import { useUsernameStore, useCountriesStore } from "@src/stores";
 
 import { STYLES } from "./styles";
 
@@ -14,6 +14,7 @@ export function Home() {
   const navigate = useNavigate();
 
   const { username, setUsername } = useUsernameStore((state) => state);
+  const { countries, fetchCountries } = useCountriesStore((state) => state);
 
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.username);
@@ -26,6 +27,14 @@ export function Home() {
       navigate(ROUTES.login);
     }
   }, []);
+
+  useEffect(() => {
+    if (!username) return;
+
+    if (countries.status === QUERY_STATUS.idle) {
+      fetchCountries();
+    }
+  }, [username, countries.status]);
 
   return (
     <Layout>

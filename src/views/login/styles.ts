@@ -1,9 +1,4 @@
 export const STYLES: Record<string, React.CSSProperties> = {
-  layout: {
-    overflow: "hidden",
-    height: "100vh",
-    padding: 64,
-  },
   header: {
     textAlign: "center",
     height: 96,

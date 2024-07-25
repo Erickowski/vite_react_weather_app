@@ -1,10 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { Button, Input, Layout, Typography } from "antd";
+import { Button, Input, Typography } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 
 import { ROUTES } from "@src/types";
+import { Layout } from "@src/components";
 
 import { STYLES } from "./styles";
 
@@ -35,7 +36,7 @@ export function Login() {
   }, []);
 
   return (
-    <Layout style={STYLES.layout}>
+    <Layout>
       <Header style={STYLES.header}>
         <Typography.Title level={1}>Login</Typography.Title>
       </Header>

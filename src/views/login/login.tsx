@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Layout, Typography } from "antd";
@@ -21,11 +21,18 @@ export function Login() {
   const handleLogin = () => {
     if (username.trim()) {
       setIsUsernameValid(true);
+      localStorage.setItem("username", username);
       navigate(ROUTES.home);
     } else {
       setIsUsernameValid(false);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("username")) {
+      navigate(ROUTES.home);
+    }
+  }, []);
 
   return (
     <Layout style={STYLES.layout}>

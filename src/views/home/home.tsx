@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Typography } from "antd";
@@ -6,7 +6,7 @@ import { Content, Header } from "antd/es/layout/layout";
 
 import { COUNTRIES, LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
 import { Layout } from "@src/components";
-import { useUsernameStore } from "@src/stores";
+import { useUsernameStore, useSearchStore } from "@src/stores";
 
 import { STYLES } from "./styles";
 import Search from "antd/es/input/Search";
@@ -15,11 +15,27 @@ export function Home() {
   const navigate = useNavigate();
 
   const { username, setUsername } = useUsernameStore((state) => state);
+  const { city, country, setCity, setCountry } = useSearchStore(
+    (state) => state
+  );
 
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.username);
     setUsername("");
     navigate(ROUTES.login);
+  };
+
+  const handleCountry = (countryValue: string) => {
+    setCountry(countryValue);
+  };
+
+  const handleCity = (e: ChangeEvent<HTMLInputElement>) => {
+    setCity(e.target.value);
+  };
+
+  const handleSearch = () => {
+    console.log({ country });
+    console.log({ city });
   };
 
   useEffect(() => {
@@ -39,9 +55,10 @@ export function Home() {
       <Content>
         <Typography.Title level={3}>Country List</Typography.Title>
         <Select
-          defaultValue="Select some country"
+          defaultValue={country}
           style={STYLES.select}
           options={COUNTRIES}
+          onChange={handleCountry}
         />
       </Content>
       <Content>
@@ -50,6 +67,9 @@ export function Home() {
           placeholder="Type some city"
           enterButton="Search"
           size="large"
+          value={city}
+          onChange={handleCity}
+          onSearch={handleSearch}
         />
       </Content>
       <Content>Weather Cards</Content>

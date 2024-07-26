@@ -5,4 +5,5 @@ export const STYLES: Record<string, React.CSSProperties> = {
     justifyContent: "space-between",
     backgroundColor: "transparent",
   },
+  select: { width: "100%" },
 };

@@ -9,6 +9,7 @@ import { Layout } from "@src/components";
 import { useUsernameStore } from "@src/stores";
 
 import { STYLES } from "./styles";
+import Search from "antd/es/input/Search";
 
 export function Home() {
   const navigate = useNavigate();
@@ -36,14 +37,21 @@ export function Home() {
         </Button>
       </Header>
       <Content>
-        <Typography.Title level={3}>Country Input</Typography.Title>
+        <Typography.Title level={3}>Country List</Typography.Title>
         <Select
           defaultValue="Select some country"
           style={STYLES.select}
           options={COUNTRIES}
         />
       </Content>
-      <Content>City List</Content>
+      <Content>
+        <Typography.Title level={3}>City Input</Typography.Title>
+        <Search
+          placeholder="Type some city"
+          enterButton="Search"
+          size="large"
+        />
+      </Content>
       <Content>Weather Cards</Content>
     </Layout>
   );

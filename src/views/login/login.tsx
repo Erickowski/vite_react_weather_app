@@ -45,6 +45,8 @@ export function Login() {
       <Content style={STYLES.content}>
         <Typography.Title level={5}>Username</Typography.Title>
         <Input
+          aria-label="username-input"
+          role="textbox"
           onChange={handleChangeUsername}
           status={isUsernameValid ? "" : "error"}
           value={username}
@@ -56,7 +58,7 @@ export function Login() {
         )}
       </Content>
       <Footer style={STYLES.footer}>
-        <Button type="primary" onClick={handleLogin}>
+        <Button aria-label="login-button" type="primary" onClick={handleLogin}>
           Login
         </Button>
       </Footer>

@@ -4,7 +4,7 @@ export default {
   moduleNameMapper: {
     "^@src/(.*)": "<rootDir>/src/$1",
   },
-  setupFiles: ["<rootDir>/jest.setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   transform: {
     "^.+\\.tsx?$": [
       "ts-jest",

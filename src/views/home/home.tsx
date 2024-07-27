@@ -147,7 +147,7 @@ export function Home() {
         )}
         {isCityAddedBefore && (
           <Typography.Text style={STYLES.textError}>
-            Ya agregaste esta ciudad.
+            This city is added before.
           </Typography.Text>
         )}
       </Content>

@@ -33,7 +33,9 @@ export function Home() {
   const { weather, fetchWeather, clearWeather } = useWeatherStore(
     (state) => state
   );
-  const { addWeather, weathers } = useWeatherSelectedStore((state) => state);
+  const { addWeather, weathers, clearWeathers } = useWeatherSelectedStore(
+    (state) => state
+  );
 
   const [areValuesValid, setAreValuesValid] = useState(true);
   const [isCityAddedBefore, setIsCityAddedBefore] = useState(false);
@@ -41,6 +43,9 @@ export function Home() {
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.username);
     setUsername("");
+    clearSearch();
+    clearWeather();
+    clearWeathers();
     navigate(ROUTES.login);
   };
 

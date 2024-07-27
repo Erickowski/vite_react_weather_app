@@ -6,6 +6,7 @@ interface WeatherSelectedState {
   weathers: WeatherFormatted[];
   addWeather: (weather: WeatherFormatted) => void;
   removeWeather: (id: string) => void;
+  clearWeathers: () => void;
 }
 
 export const useWeatherSelectedStore = create<WeatherSelectedState>((set) => ({
@@ -16,4 +17,5 @@ export const useWeatherSelectedStore = create<WeatherSelectedState>((set) => ({
     set((state) => ({
       weathers: state.weathers.filter((element) => element.id !== id),
     })),
+  clearWeathers: () => set(() => ({ weathers: [] })),
 }));

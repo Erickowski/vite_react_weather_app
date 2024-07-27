@@ -7,7 +7,6 @@ import { LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
 import { Login } from "../login";
 
 const navigateMock = jest.fn();
-
 const getItemMock = jest.fn();
 const setItemMock = jest.fn();
 

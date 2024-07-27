@@ -1,9 +1,13 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { Button, Select, Typography } from "antd";
-import { Content, Header } from "antd/es/layout/layout";
-import Search from "antd/es/input/Search";
+import {
+  Button,
+  Select,
+  Typography,
+  Layout as LayoutComponent,
+  Input,
+} from "antd";
 
 import {
   COUNTRIES,
@@ -22,6 +26,9 @@ import {
 } from "@src/stores";
 
 import { STYLES } from "./styles";
+
+const { Content, Header } = LayoutComponent;
+const { Search } = Input;
 
 export function Home() {
   const navigate = useNavigate();
@@ -97,7 +104,7 @@ export function Home() {
     <Layout>
       <Header style={STYLES.header}>
         <Typography.Title level={2}>Welcome {username}</Typography.Title>
-        <Button type="text" onClick={handleLogout}>
+        <Button type="text" onClick={handleLogout} aria-label="logout-button">
           Logout
         </Button>
       </Header>
@@ -113,6 +120,8 @@ export function Home() {
       <Content>
         <Typography.Title level={3}>City Input</Typography.Title>
         <Search
+          aria-label="search-input"
+          role="textbox"
           placeholder="Type some city"
           enterButton="Search"
           size="large"
@@ -136,7 +145,9 @@ export function Home() {
                 {weather.data.name}, {weather.data.region},{" "}
                 {weather.data.country}
               </Typography.Text>
-              <Button onClick={handleAddCity}>Add City</Button>
+              <Button onClick={handleAddCity} aria-label="add-city-button">
+                Add City
+              </Button>
             </div>
           </div>
         )}

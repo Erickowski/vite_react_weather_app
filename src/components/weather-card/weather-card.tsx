@@ -14,7 +14,7 @@ export function WeatherCard({
   windMph,
   icon,
 }: WeatherFormatted) {
-  const removeWeather = useWeatherSelectedStore((state) => state.removeWeather);
+  const { removeWeather } = useWeatherSelectedStore((state) => state);
 
   const handleRemove = () => {
     removeWeather(id);
@@ -25,7 +25,11 @@ export function WeatherCard({
       size="small"
       title={`${name}, ${country}`}
       extra={
-        <Button type="link" onClick={handleRemove}>
+        <Button
+          type="link"
+          onClick={handleRemove}
+          aria-label="remove-city-button"
+        >
           Remove
         </Button>
       }

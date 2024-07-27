@@ -18,6 +18,7 @@ interface fetchProps {
 interface WeatherState {
   weather: Weather;
   fetchWeather: ({ city, country }: fetchProps) => void;
+  clearWeather: () => void;
 }
 
 const INITIAL_STATE = {
@@ -72,4 +73,5 @@ export const useWeatherStore = create<WeatherState>((set) => ({
       });
     }
   },
+  clearWeather: () => set(() => ({ weather: INITIAL_STATE })),
 }));

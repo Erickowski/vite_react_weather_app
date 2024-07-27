@@ -3,12 +3,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Typography } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
+import Search from "antd/es/input/Search";
 
 import {
   COUNTRIES,
   LOCAL_STORAGE_KEYS,
   QUERY_STATUS,
   ROUTES,
+  WeatherFormatted,
 } from "@src/types";
 import { Layout } from "@src/components";
 import {
@@ -16,19 +18,22 @@ import {
   useSearchStore,
   SEARCH_INITIAL_STATE,
   useWeatherStore,
+  useWeatherSelectedStore,
 } from "@src/stores";
 
 import { STYLES } from "./styles";
-import Search from "antd/es/input/Search";
 
 export function Home() {
   const navigate = useNavigate();
 
   const { username, setUsername } = useUsernameStore((state) => state);
-  const { city, country, setCity, setCountry } = useSearchStore(
+  const { city, country, setCity, setCountry, clearSearch } = useSearchStore(
     (state) => state
   );
-  const { weather, fetchWeather } = useWeatherStore((state) => state);
+  const { weather, fetchWeather, clearWeather } = useWeatherStore(
+    (state) => state
+  );
+  const { addWeather, weathers } = useWeatherSelectedStore((state) => state);
 
   const [areValuesValid, setAreValuesValid] = useState(true);
 
@@ -57,7 +62,9 @@ export function Home() {
   };
 
   const handleAddCity = () => {
-    console.log(weather.data);
+    addWeather(weather.data as WeatherFormatted);
+    clearSearch();
+    clearWeather();
   };
 
   useEffect(() => {
@@ -65,6 +72,8 @@ export function Home() {
       navigate(ROUTES.login);
     }
   }, []);
+
+  console.log(weathers);
 
   return (
     <Layout>
@@ -119,7 +128,11 @@ export function Home() {
           </Typography.Text>
         )}
       </Content>
-      {/* <p>Weather Cards</p> */}
+      {weathers.length ? (
+        <Content>
+          <Typography.Title level={4}>Weather Cards</Typography.Title>
+        </Content>
+      ) : null}
     </Layout>
   );
 }

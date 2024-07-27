@@ -5,6 +5,7 @@ interface SearchState {
   city: string;
   setCountry: (country: string) => void;
   setCity: (city: string) => void;
+  clearSearch: () => void;
 }
 
 export const SEARCH_INITIAL_STATE = {
@@ -16,4 +17,5 @@ export const useSearchStore = create<SearchState>((set) => ({
   ...SEARCH_INITIAL_STATE,
   setCountry: (country) => set(() => ({ country })),
   setCity: (city) => set(() => ({ city })),
+  clearSearch: () => set(() => ({ ...SEARCH_INITIAL_STATE })),
 }));

@@ -15,6 +15,7 @@ export interface Weather {
 }
 
 export interface WeatherFormatted {
+  id: string;
   icon: string;
   humidity: number;
   tempC: number;

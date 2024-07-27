@@ -36,6 +36,7 @@ export function Home() {
   const { addWeather, weathers } = useWeatherSelectedStore((state) => state);
 
   const [areValuesValid, setAreValuesValid] = useState(true);
+  const [isCityAddedBefore, setIsCityAddedBefore] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.username);
@@ -52,6 +53,7 @@ export function Home() {
   };
 
   const handleSearch = () => {
+    setIsCityAddedBefore(false);
     if (country === SEARCH_INITIAL_STATE.country || city.trim() === "") {
       setAreValuesValid(false);
       return;
@@ -62,6 +64,19 @@ export function Home() {
   };
 
   const handleAddCity = () => {
+    const { name, region, country } = weather.data;
+    const cityAdded = weathers.find(
+      (element) =>
+        element.name === name &&
+        element.region === region &&
+        element.country === country
+    );
+
+    if (cityAdded) {
+      setIsCityAddedBefore(true);
+      return;
+    }
+
     addWeather(weather.data as WeatherFormatted);
     clearSearch();
     clearWeather();
@@ -84,7 +99,7 @@ export function Home() {
       <Content>
         <Typography.Title level={3}>Country List</Typography.Title>
         <Select
-          defaultValue={country}
+          value={country}
           style={STYLES.select}
           options={COUNTRIES}
           onChange={handleCountry}
@@ -123,6 +138,11 @@ export function Home() {
         {weather.status === QUERY_STATUS.error && (
           <Typography.Text style={STYLES.textError}>
             {weather.error}
+          </Typography.Text>
+        )}
+        {isCityAddedBefore && (
+          <Typography.Text style={STYLES.textError}>
+            Ya agregaste esta ciudad.
           </Typography.Text>
         )}
       </Content>

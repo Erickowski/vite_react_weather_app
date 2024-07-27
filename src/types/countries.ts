@@ -1,5 +1,11 @@
 export const COUNTRIES = [
   {
+    label: "Select one country",
+    value: "",
+    key: "",
+    disabled: true,
+  },
+  {
     label: "Estados Unidos",
     value: "US",
     key: "USA United States of America",

@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { HTTP_STATUS_CODE, QUERY_STATUS } from "@src/types";
 import { WEATHER_API } from "@src/api";
+import { WeatherAdapter } from "@src/adapters";
 
 interface Weather {
   data: unknown;
@@ -56,7 +57,7 @@ export const useWeatherStore = create<WeatherState>((set) => ({
 
       set({
         weather: {
-          data,
+          data: WeatherAdapter(data),
           error: "",
           status: QUERY_STATUS.success,
         },

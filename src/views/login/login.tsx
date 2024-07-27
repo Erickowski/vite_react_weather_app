@@ -21,7 +21,7 @@ export function Login() {
   };
 
   const handleLogin = () => {
-    if (username.trim()) {
+    if (username.trim() !== "") {
       setIsUsernameValid(true);
       localStorage.setItem(LOCAL_STORAGE_KEYS.username, username);
       navigate(ROUTES.home);

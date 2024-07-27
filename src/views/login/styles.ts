@@ -1,3 +1,5 @@
+import { GLOBAL_STYLES } from "@src/styles";
+
 export const STYLES: Record<string, React.CSSProperties> = {
   header: {
     textAlign: "center",
@@ -10,9 +12,7 @@ export const STYLES: Record<string, React.CSSProperties> = {
     minHeight: 120,
     lineHeight: "60px",
   },
-  textError: {
-    color: "red",
-  },
+  textError: GLOBAL_STYLES.text.error,
   footer: {
     textAlign: "center",
   },

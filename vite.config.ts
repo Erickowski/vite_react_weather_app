@@ -10,6 +10,7 @@ export default defineConfig({
       "@src/adapters": path.resolve(__dirname, "./src/adapters"),
       "@src/api": path.resolve(__dirname, "./src/api"),
       "@src/components": path.resolve(__dirname, "./src/components"),
+      "@src/styles": path.resolve(__dirname, "./src/styles"),
       "@src/stores": path.resolve(__dirname, "./src/stores"),
       "@src/types": path.resolve(__dirname, "./src/types"),
       "@src/views": path.resolve(__dirname, "./src/views"),

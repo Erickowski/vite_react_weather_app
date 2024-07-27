@@ -1,3 +1,3 @@
 export * from "./username";
-export * from "./countries";
+export * from "./weather";
 export * from "./search";

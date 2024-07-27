@@ -4,12 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { Button, Select, Typography } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 
-import { COUNTRIES, LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
+import {
+  COUNTRIES,
+  LOCAL_STORAGE_KEYS,
+  QUERY_STATUS,
+  ROUTES,
+} from "@src/types";
 import { Layout } from "@src/components";
 import {
   useUsernameStore,
   useSearchStore,
   SEARCH_INITIAL_STATE,
+  useWeatherStore,
 } from "@src/stores";
 
 import { STYLES } from "./styles";
@@ -22,6 +28,7 @@ export function Home() {
   const { city, country, setCity, setCountry } = useSearchStore(
     (state) => state
   );
+  const { weather, fetchWeather } = useWeatherStore((state) => state);
 
   const [areValuesValid, setAreValuesValid] = useState(true);
 
@@ -45,8 +52,8 @@ export function Home() {
       return;
     }
 
-    console.log({ country });
-    console.log({ city });
+    setAreValuesValid(true);
+    fetchWeather({ city, country });
   };
 
   useEffect(() => {
@@ -81,6 +88,7 @@ export function Home() {
           value={city}
           onChange={handleCity}
           onSearch={handleSearch}
+          loading={weather.status === QUERY_STATUS.loading}
         />
         {!areValuesValid && (
           <Typography.Text style={STYLES.textError}>

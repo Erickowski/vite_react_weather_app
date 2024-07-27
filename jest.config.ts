@@ -4,6 +4,10 @@ export default {
   moduleNameMapper: {
     "^@src/(.*)": "<rootDir>/src/$1",
   },
+  modulePathIgnorePatterns: [
+    "<rootDir>/src/main.tsx",
+    "<rootDir>/src/router.tsx",
+  ],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   transform: {
     "^.+\\.tsx?$": [

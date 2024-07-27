@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
-import { QUERY_STATUS } from "@src/types";
+import { HTTP_STATUS_CODE, QUERY_STATUS } from "@src/types";
 import { WEATHER_API } from "@src/api";
 
 interface Weather {
   data: unknown;
+  error: string;
   status: QUERY_STATUS;
 }
 
@@ -20,6 +21,7 @@ interface WeatherState {
 
 const INITIAL_STATE = {
   data: {},
+  error: "",
   status: QUERY_STATUS.idle,
 };
 
@@ -30,16 +32,32 @@ export const useWeatherStore = create<WeatherState>((set) => ({
       set({
         weather: {
           data: {},
+          error: "",
           status: QUERY_STATUS.loading,
         },
       });
+
       const response = await fetch(
         `${WEATHER_API}&q=${city},${country}&aqi=no`
       );
 
+      const data = await response.json();
+
+      if (response.status !== HTTP_STATUS_CODE.ok) {
+        set({
+          weather: {
+            data: {},
+            error: data.error.message,
+            status: QUERY_STATUS.error,
+          },
+        });
+        return;
+      }
+
       set({
         weather: {
-          data: await response.json(),
+          data,
+          error: "",
           status: QUERY_STATUS.success,
         },
       });
@@ -47,6 +65,7 @@ export const useWeatherStore = create<WeatherState>((set) => ({
       set({
         weather: {
           data: {},
+          error: "We sorry, something failed.",
           status: QUERY_STATUS.error,
         },
       });

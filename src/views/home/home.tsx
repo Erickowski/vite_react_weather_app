@@ -62,6 +62,8 @@ export function Home() {
     }
   }, []);
 
+  console.log(weather.data);
+
   return (
     <Layout>
       <Header style={STYLES.header}>
@@ -96,7 +98,14 @@ export function Home() {
           </Typography.Text>
         )}
       </Content>
-      <Content>Weather Cards</Content>
+      <Content>
+        {weather.status === QUERY_STATUS.success && <p>Weather Cards</p>}
+        {weather.status === QUERY_STATUS.error && (
+          <Typography.Text style={STYLES.textError}>
+            {weather.error}
+          </Typography.Text>
+        )}
+      </Content>
     </Layout>
   );
 }

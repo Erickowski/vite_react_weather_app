@@ -1,10 +1,12 @@
-import { Card, Typography } from "antd";
+import { Button, Card, Typography } from "antd";
 
 import { WeatherFormatted } from "@src/types";
+import { useWeatherSelectedStore } from "@src/stores";
 
 import { STYLES } from "./styles";
 
 export function WeatherCard({
+  id,
   humidity,
   country,
   name,
@@ -12,11 +14,21 @@ export function WeatherCard({
   windMph,
   icon,
 }: WeatherFormatted) {
+  const removeWeather = useWeatherSelectedStore((state) => state.removeWeather);
+
+  const handleRemove = () => {
+    removeWeather(id);
+  };
+
   return (
     <Card
       size="small"
       title={`${name}, ${country}`}
-      extra={<a href="#">Remove</a>}
+      extra={
+        <Button type="link" onClick={handleRemove}>
+          Remove
+        </Button>
+      }
       style={{ width: 250 }}
     >
       <div style={STYLES.image}>

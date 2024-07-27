@@ -24,7 +24,10 @@
     "baseUrl": "./src",
     "paths": {
       "@src/*": ["./src/*"]
-    }
+    },
+
+    /* Testing */
+    "esModuleInterop": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

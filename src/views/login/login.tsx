@@ -1,14 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { Button, Input, Typography } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Button, Input, Typography, Layout as LayoutComponent } from "antd";
 
 import { LOCAL_STORAGE_KEYS, ROUTES } from "@src/types";
 import { Layout } from "@src/components";
 import { useUsernameStore } from "@src/stores";
 
 import { STYLES } from "./styles";
+
+const { Content, Footer, Header } = LayoutComponent;
 
 export function Login() {
   const navigate = useNavigate();

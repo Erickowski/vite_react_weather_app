@@ -9,4 +9,5 @@ export const STYLES: Record<string, React.CSSProperties> = {
   },
   select: { width: "100%" },
   textError: GLOBAL_STYLES.text.error,
+  cityFound: { display: "flex", justifyContent: "space-between" },
 };

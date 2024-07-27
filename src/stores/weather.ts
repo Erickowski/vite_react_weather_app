@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-import { HTTP_STATUS_CODE, QUERY_STATUS } from "@src/types";
+import { HTTP_STATUS_CODE, QUERY_STATUS, WeatherFormatted } from "@src/types";
 import { WEATHER_API } from "@src/api";
 import { WeatherAdapter } from "@src/adapters";
 
 interface Weather {
-  data: unknown;
+  data: Partial<WeatherFormatted>;
   error: string;
   status: QUERY_STATUS;
 }

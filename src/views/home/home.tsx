@@ -56,13 +56,15 @@ export function Home() {
     fetchWeather({ city, country });
   };
 
+  const handleAddCity = () => {
+    console.log(weather.data);
+  };
+
   useEffect(() => {
     if (!localStorage.getItem(LOCAL_STORAGE_KEYS.username)) {
       navigate(ROUTES.login);
     }
   }, []);
-
-  console.log(weather.data);
 
   return (
     <Layout>
@@ -99,13 +101,25 @@ export function Home() {
         )}
       </Content>
       <Content>
-        {weather.status === QUERY_STATUS.success && <p>Weather Cards</p>}
+        {weather.status === QUERY_STATUS.success && (
+          <div>
+            <Typography.Title level={4}>City found</Typography.Title>
+            <div style={STYLES.cityFound}>
+              <Typography.Text>
+                {weather.data.name}, {weather.data.region},{" "}
+                {weather.data.country}
+              </Typography.Text>
+              <Button onClick={handleAddCity}>Add City</Button>
+            </div>
+          </div>
+        )}
         {weather.status === QUERY_STATUS.error && (
           <Typography.Text style={STYLES.textError}>
             {weather.error}
           </Typography.Text>
         )}
       </Content>
+      {/* <p>Weather Cards</p> */}
     </Layout>
   );
 }

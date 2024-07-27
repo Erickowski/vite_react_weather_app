@@ -12,7 +12,7 @@ import {
   ROUTES,
   WeatherFormatted,
 } from "@src/types";
-import { Layout } from "@src/components";
+import { Layout, WeatherCard } from "@src/components";
 import {
   useUsernameStore,
   useSearchStore,
@@ -73,8 +73,6 @@ export function Home() {
     }
   }, []);
 
-  console.log(weathers);
-
   return (
     <Layout>
       <Header style={STYLES.header}>
@@ -131,6 +129,11 @@ export function Home() {
       {weathers.length ? (
         <Content>
           <Typography.Title level={4}>Weather Cards</Typography.Title>
+          <div style={STYLES.weatherCards}>
+            {weathers.map((weather) => (
+              <WeatherCard key={weather.id} {...weather} />
+            ))}
+          </div>
         </Content>
       ) : null}
     </Layout>
